@@ -5,8 +5,10 @@ import com.grupp2.webservices.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -34,5 +36,15 @@ public class UserService {
             throw new IllegalStateException("User with id " + personalId + " does not exists");
         }
         userRepository.deleteById(personalId);
+    }
+
+    @Transactional
+    public void updateUser(Long personalId, String name) {
+
+        User user = userRepository.findById(personalId).orElseThrow(() -> new IllegalStateException("user with id " + personalId + " does not exist"));
+
+        if (name != null && name.length() > 0 && !Objects.equals(user.getName(), name)) {
+            user.setName(name);
+        }
     }
 }
