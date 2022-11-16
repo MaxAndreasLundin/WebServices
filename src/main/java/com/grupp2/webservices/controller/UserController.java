@@ -1,8 +1,10 @@
 package com.grupp2.webservices.controller;
 
 import com.grupp2.webservices.entity.User;
+import com.grupp2.webservices.exception.ResourceNotFoundException;
 import com.grupp2.webservices.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,5 +38,19 @@ public class UserController {
     @DeleteMapping(path = "{personalId}")
     public void deleteUser(@PathVariable("personalId") Long personalId) {
         userService.deleteUser(personalId);
+    }
+
+    @PutMapping("{personalId}")
+    public ResponseEntity<User> updateUser(@PathVariable ("personalId") Long personalId, @RequestBody User userDetails) {
+        User updateUser = userService.findById(personalId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id: " + personalId));
+
+        updateUser.setName(userDetails.getName());
+        updateUser.setSurname(userDetails.getSurname());
+        updateUser.setEmail(userDetails.getEmail());
+
+        userService.save(updateUser);
+
+        return ResponseEntity.ok(updateUser);
     }
 }
