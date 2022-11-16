@@ -12,17 +12,25 @@ import javax.persistence.*;
 @Setter
 @RequiredArgsConstructor
 public class User {
+
     @Id
-    @Column(unique=true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column
     private String name;
+
+    @Column
     private String surname;
+
+    @Column
     private String email;
+
+    @Column
     private String password;
 
 
-    public User(Long id, String name, String surname, String email, String password) {
-        this.id = id;
+    public User(String name, String surname, String email, String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;

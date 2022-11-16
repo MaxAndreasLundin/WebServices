@@ -14,8 +14,8 @@ public class InitialDataConfig {
     @Bean
     CommandLineRunner commandLineRunner(UserRepository userRepository) {
         return args -> {
-            User arne = new User(198905083612L, "Arne", "Andersson", "arne@hotmail.com", "password");
-            User kalle = new User(197003056513L, "Kalle", "Karlsson", "kalle@gmail.com", "123");
+            User arne = new User("Arne", "Andersson", "arne@hotmail.com", "password");
+            User kalle = new User("Kalle", "Karlsson", "kalle@gmail.com", "123");
 
             userRepository.saveAll(List.of(arne, kalle));
         };
