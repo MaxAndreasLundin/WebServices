@@ -1,6 +1,7 @@
 package com.grupp2.webservices.controller;
 
 import com.grupp2.webservices.entity.User;
+import com.grupp2.webservices.exception.ApiRequestException;
 import com.grupp2.webservices.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,12 +21,14 @@ public class UserController {
 
     @GetMapping
     public List<User> getUser() {
-        return userService.getUser();
+        throw new ApiRequestException("Cannot get all users");
+        //return userService.getUser();
     }
 
     @GetMapping(path = "{personalId}")
     public Optional<User> findById(@PathVariable("personalId") Long personalId) {
-        return userService.findById(personalId);
+        throw new ApiRequestException("No user with id: " + personalId);
+        //return userService.findById(personalId);
     }
 
     @PostMapping
