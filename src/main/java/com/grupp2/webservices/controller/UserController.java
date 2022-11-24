@@ -21,14 +21,12 @@ public class UserController {
 
     @GetMapping
     public List<User> getUser() {
-        throw new ApiRequestException("Cannot get all users");
-        //return userService.getUser();
+        return userService.getUser();
     }
 
     @GetMapping(path = "{personalId}")
     public Optional<User> findById(@PathVariable("personalId") Long personalId) {
-        throw new ApiRequestException("No user with id: " + personalId);
-        //return userService.findById(personalId);
+        return userService.findById(personalId);
     }
 
     @PostMapping
