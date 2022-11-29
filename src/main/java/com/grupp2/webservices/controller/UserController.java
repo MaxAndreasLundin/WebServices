@@ -59,27 +59,6 @@ private final UserService userService;
         return userService.findById(id);
     }
 
-    @ExceptionHandler
-    public ResponseEntity<UserErrorResponse> handleException(UserNotFoundException e){
-        UserErrorResponse error = new UserErrorResponse();
-
-        error.setStatus(HttpStatus.NOT_FOUND.value());
-        error.setMessage(e.getMessage());
-        error.setTimeStamp(System.currentTimeMillis());
-
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<UserErrorResponse> handleException(Exception e){
-        UserErrorResponse error = new UserErrorResponse();
-
-        error.setStatus(HttpStatus.BAD_REQUEST.value());
-        error.setMessage(e.getMessage());
-        error.setTimeStamp(System.currentTimeMillis());
-
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-    }
 
 
 }
