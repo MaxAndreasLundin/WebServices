@@ -1,9 +1,7 @@
 package com.grupp2.webservices.controller;
 
 import com.grupp2.webservices.entity.User;
-import com.grupp2.webservices.exception.ApiRequestException;
 import com.grupp2.webservices.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +12,6 @@ import java.util.Optional;
 public class UserController {
     private final UserService userService;
 
-    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }

@@ -3,7 +3,6 @@ package com.grupp2.webservices.service;
 import com.grupp2.webservices.entity.User;
 import com.grupp2.webservices.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +15,7 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
-    @Autowired
+
     public List<User> getUser() {
         return userRepository.findAll();
     }
