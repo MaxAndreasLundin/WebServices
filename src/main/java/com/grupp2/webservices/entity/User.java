@@ -19,10 +19,10 @@ public class User{
 
 
     @Column
-    private String name;
+    private String firstname;
 
     @Column
-    private String surname;
+    private String lastname;
 
     @Column
     private String email;
@@ -30,9 +30,9 @@ public class User{
     @Column
     private String password;
 
-    public User (String name, String surname, String email, String password){
-        this.name = name;
-        this.surname = surname;
+    public User (String firstname, String lastname, String email, String password){
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
         this.password = password;
     }

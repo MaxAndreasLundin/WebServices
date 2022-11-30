@@ -25,14 +25,18 @@ public class UserService {
     }
 
     public Optional<User> findById(Long id) {
+        if ((id >= getUsers().size()) || (id <= 0)) {
+            throw new UserNotFoundException("id not found - " + id);
+        }
         return userRepository.findById(id);
     }
 
     public void deleteUserById(Long id) {
         try {
             userRepository.deleteById(id);
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new UserNotFoundException("id not found - " + id);
+            /*e.printStackTrace();*/
         }
     }
 
