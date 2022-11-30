@@ -1,12 +1,9 @@
 package com.grupp2.webservices.controller;
 
 import com.grupp2.webservices.entity.User;
-import com.grupp2.webservices.service.UserErrorResponse;
 import com.grupp2.webservices.service.UserNotFoundException;
 import com.grupp2.webservices.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,7 +50,7 @@ private final UserService userService;
 
     @GetMapping(path = "{id}")
     public Optional<User> getUserById(@PathVariable("id") Long id) {
-        if ((id>= listUsers().size()) || (id<0)){
+        if ((id>= listUsers().size()) || (id<=0)){
             throw new UserNotFoundException("id not found - " + id);
         }
         return userService.findById(id);
