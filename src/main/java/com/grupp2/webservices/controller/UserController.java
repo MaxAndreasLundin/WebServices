@@ -21,7 +21,7 @@ private final UserServiceImpl userService;
 
     @GetMapping("/list")
     public List<User> listUsers(){
-        return userService.getUsers();
+        return userService.findAllUsers();
     }
 
     @PostMapping
@@ -43,7 +43,7 @@ private final UserServiceImpl userService;
 
     @GetMapping(path = "{id}")
     public Optional<User> getUserById(@PathVariable("id") Long id) {
-        return userService.findById(id);
+        return userService.findUserById(id);
     }
 
 
