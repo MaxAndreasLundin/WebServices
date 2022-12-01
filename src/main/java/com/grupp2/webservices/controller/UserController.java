@@ -1,7 +1,7 @@
 package com.grupp2.webservices.controller;
 
 import com.grupp2.webservices.entity.User;
-import com.grupp2.webservices.service.UserService;
+import com.grupp2.webservices.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,16 +12,15 @@ import java.util.Optional;
 @RequestMapping(path = "/users")
 public class UserController {
 
-private final UserService userService;
+private final UserServiceImpl userService;
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserServiceImpl userService){
         this.userService = userService;
 }
 
     @GetMapping("/list")
     public List<User> listUsers(){
-
         return userService.getUsers();
     }
 
@@ -29,11 +28,6 @@ private final UserService userService;
     public User createNewUser(@RequestBody User user){
         return userService.createNewUser(user);
     }
-
-    /*@GetMapping(path = "{id}")
-    public Optional<User> findById(@PathVariable("id") Long id) {
-        return userService.findById(id);
-    }*/
 
     @DeleteMapping(path ="{id}")
     public void deleteUserById(@PathVariable("id") Long id){
