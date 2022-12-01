@@ -1,7 +1,7 @@
 package com.grupp2.webservices.controller;
 
 import com.grupp2.webservices.entity.User;
-import com.grupp2.webservices.service.UserServiceImpl;
+import com.grupp2.webservices.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +12,10 @@ import java.util.Optional;
 @RequestMapping(path = "/users")
 public class UserController {
 
-private final UserServiceImpl userService;
+private final UserService userService;
 
     @Autowired
-    public UserController(UserServiceImpl userService){
+    public UserController(UserService userService){
         this.userService = userService;
 }
 
