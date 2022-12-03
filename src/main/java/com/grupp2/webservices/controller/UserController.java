@@ -37,7 +37,6 @@ private final UserService userService;
     @PutMapping("{id}")
     public void updateUser(@PathVariable("id")Long id, @RequestBody User user){
     userService.updateUser(id,user);
-
     }
 
     @GetMapping(path = "{id}")
