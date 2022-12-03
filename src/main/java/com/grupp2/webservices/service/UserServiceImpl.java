@@ -5,6 +5,7 @@ import com.grupp2.webservices.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,14 +22,33 @@ public class UserServiceImpl implements UserService {
     }
 
     public Optional<User> findUserById(Long id) {
-        if ((id >= findAllUsers().size()) || (id <= 0)) {
+        if ((id > findAllUsers().size()) || (id <= 0)) {
             throw new UserNotFoundException("id not found - " + id);
         }
         return userRepository.findById(id);
     }
 
-    public void updateUser(Long id, String name) {
+    @Transactional
+    public void updateUser(Long id, User user) {
+
+        User userToUpdate = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("id not found - " + id));
+
+        if (user.getFirstname() != null) {
+            userToUpdate.setFirstname(user.getFirstname());
+        }
+        if (user.getLastname() != null) {
+            userToUpdate.setLastname(user.getLastname());
+        }
+        if (user.getEmail() != null) {
+            userToUpdate.setEmail(user.getEmail());
+        }
+        if (user.getPassword() != null) {
+            userToUpdate.setPassword(user.getPassword());
+        }
+
+        userRepository.save(userToUpdate);
     }
+
 
     public User createNewUser(User user) {
         return userRepository.save(user);

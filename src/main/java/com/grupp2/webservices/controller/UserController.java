@@ -34,18 +34,16 @@ private final UserService userService;
         userService.deleteUserById(id);
     }
 
-    //@PutMapping
-    @PatchMapping
-    public User updateUser(@RequestBody User theUser){
-        userService.createNewUser(theUser);
-        return theUser;
+    @PutMapping("{id}")
+    public void updateUser(@PathVariable("id")Long id, @RequestBody User user){
+    userService.updateUser(id,user);
+
     }
 
     @GetMapping(path = "{id}")
     public Optional<User> getUserById(@PathVariable("id") Long id) {
         return userService.findUserById(id);
     }
-
 
 
 }

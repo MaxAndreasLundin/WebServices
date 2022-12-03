@@ -11,7 +11,7 @@ public interface UserService {
 
     Optional<User> findUserById(Long id);
 
-    //updateUser(Long id, String name);
+    void updateUser(Long id, User user);
 
     User createNewUser(User user);
 
