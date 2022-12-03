@@ -3,7 +3,6 @@ package com.grupp2.webservices.service;
 import com.grupp2.webservices.entity.User;
 import com.grupp2.webservices.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,8 +15,10 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    @Autowired
     public List<User> findAllUsers() {
+        if(userRepository.findAll().size()<=0){
+            throw new UserNotFoundException("No users found");
+        }
         return userRepository.findAll();
     }
 
@@ -33,23 +34,15 @@ public class UserServiceImpl implements UserService {
 
         User userToUpdate = findUserById(id).orElseThrow(() -> new UserNotFoundException("id not found - " + id));
 
-        if (user.getFirstname() != null) {
-            userToUpdate.setFirstname(user.getFirstname());
-        }
-        if (user.getLastname() != null) {
-            userToUpdate.setLastname(user.getLastname());
-        }
-        if (user.getEmail() != null) {
-            userToUpdate.setEmail(user.getEmail());
-        }
-        if (user.getPassword() != null) {
-            userToUpdate.setPassword(user.getPassword());
-        }
+        if (user.getFirstname() != null) { userToUpdate.setFirstname(user.getFirstname()); }
+        if (user.getLastname() != null) { userToUpdate.setLastname(user.getLastname()); }
+        if (user.getEmail() != null) { userToUpdate.setEmail(user.getEmail()); }
+        if (user.getPassword() != null) { userToUpdate.setPassword(user.getPassword()); }
 
         userRepository.save(userToUpdate);
+
     }
-
-
+    
     public User createNewUser(User user) {
         return userRepository.save(user);
     }
