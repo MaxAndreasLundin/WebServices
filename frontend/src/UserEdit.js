@@ -7,7 +7,9 @@ class UserEdit extends Component {
 
     emptyItem = {
         firstname: '',
-        email: ''
+        lastname: '',
+        email: '',
+        password: ''
     };
 
     constructor(props) {
@@ -63,13 +65,23 @@ class UserEdit extends Component {
                                onChange={this.handleChange} autoComplete="firstname"/>
                     </FormGroup>
                     <FormGroup>
+                        <Label for="lastname">Lastname</Label>
+                        <Input type="text" name="lastname" id="lastname" value={item.lastname || ''}
+                               onChange={this.handleChange} autoComplete="lastname"/>
+                    </FormGroup>
+                    <FormGroup>
                         <Label for="email">Email</Label>
-                        <Input type="text" name="email" id="email" value={item.email || ''}
+                        <Input type="email" name="email" id="email" value={item.email || ''}
                                onChange={this.handleChange} autoComplete="email"/>
                     </FormGroup>
                     <FormGroup>
+                        <Label for="password">Password</Label>
+                        <Input type="text" name="password" id="password" value={item.password || ''}
+                               onChange={this.handleChange} autoComplete="password"/>
+                    </FormGroup>
+                    <FormGroup>
                         <Button color="primary" type="submit">Save</Button>{' '}
-                        <Button color="secondary" tag={Link} to="/clients">Cancel</Button>
+                        <Button color="secondary" tag={Link} to="/users">Cancel</Button>
                     </FormGroup>
                 </Form>
             </Container>

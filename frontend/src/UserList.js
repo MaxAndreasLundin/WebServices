@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 import { Link } from 'react-router-dom';
+import {type} from "@testing-library/user-event/dist/type";
 
 class UserList extends Component {
 
@@ -40,7 +41,9 @@ class UserList extends Component {
         const userList = users.map(user => {
             return <tr key={user.id}>
                 <td style={{whiteSpace: 'nowrap'}}>{user.firstname}</td>
-                <td>{user.email}</td>
+                <td style={{whiteSpace: 'nowrap'}}>{user.lastname}</td>
+                <td style={{whiteSpace: 'nowrap'}}>{user.email}</td>
+                <td style={{whiteSpace: 'nowrap'}}>{user.password}</td>
                 <td>
                     <ButtonGroup>
                         <Button size="sm" color="primary" tag={Link} to={"/users/" + user.id}>Edit</Button>
@@ -61,7 +64,9 @@ class UserList extends Component {
                         <thead>
                         <tr>
                             <th width="30%">Firstname</th>
+                            <th width="30%">Lastname</th>
                             <th width="30%">Email</th>
+                            <th width="30%">Password</th>
                             <th width="40%">Actions</th>
                         </tr>
                         </thead>
