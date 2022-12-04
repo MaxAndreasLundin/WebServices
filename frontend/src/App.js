@@ -1,37 +1,22 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
-import React, {Component} from "react";
+import Home from './Home';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import UserList from './UserList';
+import UserEdit from "./UserEdit";
 
 class App extends Component {
-  state = {
-    users: []
-  };
-
-  async componentDidMount() {
-    const response = await fetch('/users');
-    const body = await response.json();
-    this.setState({users: body});
-  }
-
   render() {
-    const {users} = this.state;
     return (
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <div className="App-intro">
-              <h2>Users</h2>
-              {users.map(user =>
-                  <div key={user.id}>
-                    {user.firstname} {user.lastname}  ({user.email})
-                  </div>
-              )}
-            </div>
-          </header>
-        </div>
-    );
+        <Router>
+          <Switch>
+            <Route path='/' exact={true} component={Home}/>
+            <Route path='/users' exact={true} component={UserList}/>
+            <Route path='/users/:id' component={UserEdit}/>
+          </Switch>
+        </Router>
+    )
   }
 }
+
 export default App;
-
-
