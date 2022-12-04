@@ -19,7 +19,7 @@ private final UserService userService;
         this.userService = userService;
 }
 
-    @GetMapping("/list")
+    @GetMapping()
     public List<User> listUsers(){
         return userService.findAllUsers();
     }
